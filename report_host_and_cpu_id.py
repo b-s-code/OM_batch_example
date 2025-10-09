@@ -2,6 +2,7 @@
 
 import sys
 import ctypes
+import time
 
 def get_cpu_id():
     """
@@ -42,6 +43,9 @@ def main():
     hostname = get_hostname()
     command_id = get_command_id()
     print(f"command id: {command_id}, hostname: {hostname}, cpu (hw thread id): {cpu_id}")
+
+    # Sleep so that Slurm or OS does not a reuse CPU which process has finished using.
+    time.sleep(30)
 
 if __name__ == "__main__":
     main()
