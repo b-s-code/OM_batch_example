@@ -10,7 +10,7 @@
 
 set -euo pipefail
 
-module load singularity/3.11.4-nompi
+#module load singularity/3.11.4-nompi
 
 # Configuration - UPDATE WITH PATHS TO NECESSARY FILES/INSTALLS
 # OM_PATH=
