@@ -6,7 +6,6 @@
 #SBATCH --time=0:15:00
 #SBATCH --partition=work
 #SBATCH --exclusive
-#SBATCH --account=pawsey0012
 #SBATCH --mem=0
 
 set -euo pipefail
