@@ -54,6 +54,7 @@ for ((i=0; i<${TOTAL_PARAMS}; i+=CHUNK_SIZE)); do
             bash -c "
             echo 'Processing param ${PARAM} on ${SLURM_NODEID}' && \
             sleep 30 && \
+            ./report_host_and_cpu_id.py $(hostname) ${PARAM} && \
             echo 'OM completed for param ${PARAM}' 
             " &
     done
