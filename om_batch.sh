@@ -8,6 +8,13 @@
 #SBATCH --exclusive
 #SBATCH --mem=0
 
+# Note:
+# In order to determine an appropriate value for --time, it
+# is necessary to benchmark a single simulation scenario's
+# duration.  Actually, measuring a whole chunk's worth might
+# be more realistic to use as a benchmark due to resource
+# contention caused by running multiple simulations.
+
 set -euo pipefail
 
 #module load singularity/3.11.4-nompi
@@ -19,6 +26,7 @@ LOGS_DIR=logs
 
 # Calculate batch size based on node capacity
 # For work nodes, estimate that 128 jobs can run concurrently
+# There would be no reason to increase this on Setonix.
 CHUNK_SIZE=128
 
 #===============================#
@@ -48,9 +56,14 @@ for ((i=0; i<${TOTAL_PARAMS}; i+=CHUNK_SIZE)); do
         echo "Launching param ${PARAM} ($(($j+1))/${TOTAL_PARAMS})" \        
         srun --ntasks=1 \
             --cpus-per-task=1 \
-            --mem=2GB \
+            # This is suspect.  We know max available memory
+            # on a node is << 256 GB.
+            # TODO : test CPU utilisation with this flag not
+            # being used.
+            #--mem=2GB \
             --output=${LOGS_DIR}/%j_${PARAM}.log \
             --error=${LOGS_DIR}/%j_${PARAM}.log \
+            --exclusive \
             bash -c "
             echo 'Processing param ${PARAM} on ${SLURM_NODEID}' && \
             ./report_host_and_cpu_id.py $(hostname) ${PARAM} && \
