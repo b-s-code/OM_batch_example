@@ -57,9 +57,9 @@ def perform_analysis():
         num_distinct_cpus = len(set(cpu_ids))
         unused_cpu_ids = sorted([id for id in range(128) if str(id) not in cpu_ids])
 
-        print("# nodes used:", num_hosts,
+        print("\t# nodes used:", num_hosts,
               ", # simulations run:", num_simulations_run,
               ", # distinct cpus used:", num_distinct_cpus,
-              "\n unused cpus:", unused_cpu_ids)
+              "\n\tunused cpus:", unused_cpu_ids)
 
 perform_analysis()
