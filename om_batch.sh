@@ -1,7 +1,6 @@
 #!/bin/bash -l
 #SBATCH --job-name=openmalaria
 #SBATCH --nodes=1
-#SBATCH --cpus-per-task=128
 #SBATCH --ntasks=1
 #SBATCH --time=0:15:00
 #SBATCH --partition=work
