@@ -56,6 +56,7 @@ for ((i=0; i<${TOTAL_PARAMS}; i+=CHUNK_SIZE)); do
         echo "Launching param ${PARAM} ($(($j+1))/${TOTAL_PARAMS})" \        
         srun --ntasks=1 \
             --cpus-per-task=1 \
+            --mem=1GB \
             --output=${LOGS_DIR}/%j_${PARAM}.log \
             --error=${LOGS_DIR}/%j_${PARAM}.log \
             --exclusive \
