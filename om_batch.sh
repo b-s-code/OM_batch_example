@@ -56,11 +56,6 @@ for ((i=0; i<${TOTAL_PARAMS}; i+=CHUNK_SIZE)); do
         echo "Launching param ${PARAM} ($(($j+1))/${TOTAL_PARAMS})" \        
         srun --ntasks=1 \
             --cpus-per-task=1 \
-            # This is suspect.  We know max available memory
-            # on a node is << 256 GB.
-            # TODO : test CPU utilisation with this flag not
-            # being used.
-            #--mem=2GB \
             --output=${LOGS_DIR}/%j_${PARAM}.log \
             --error=${LOGS_DIR}/%j_${PARAM}.log \
             --exclusive \
